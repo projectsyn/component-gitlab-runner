@@ -1,0 +1,53 @@
+apiVersion: v1
+data:
+  check-live: "#!/bin/bash\nif /usr/bin/pgrep -f .*register-the-runner; then\n  exit\
+    \ 0\nelif /usr/bin/pgrep gitlab.*runner; then\n  exit 0\nelse\n  exit 1\nfi\n"
+  config.template.toml: "[[runners]]\n  [runners.kubernetes]\n    namespace = \"syn-gitlab-runner\"\
+    \n    image = \"ubuntu:16.04\"\n"
+  config.toml: 'concurrent = 10
+
+    check_interval = 30
+
+    log_level = "info"
+
+    '
+  entrypoint: "#!/bin/bash\nset -e\n\nmkdir -p /home/gitlab-runner/.gitlab-runner/\n\
+    \ncp /configmaps/config.toml /home/gitlab-runner/.gitlab-runner/\n\n# Set up environment\
+    \ variables for cache\nif [[ -f /secrets/accesskey && -f /secrets/secretkey ]];\
+    \ then\n  export CACHE_S3_ACCESS_KEY=$(cat /secrets/accesskey)\n  export CACHE_S3_SECRET_KEY=$(cat\
+    \ /secrets/secretkey)\nfi\n\nif [[ -f /secrets/gcs-applicaton-credentials-file\
+    \ ]]; then\n  export GOOGLE_APPLICATION_CREDENTIALS=\"/secrets/gcs-applicaton-credentials-file\"\
+    \nelif [[ -f /secrets/gcs-application-credentials-file ]]; then\n  export GOOGLE_APPLICATION_CREDENTIALS=\"\
+    /secrets/gcs-application-credentials-file\"\nelse\n  if [[ -f /secrets/gcs-access-id\
+    \ && -f /secrets/gcs-private-key ]]; then\n    export CACHE_GCS_ACCESS_ID=$(cat\
+    \ /secrets/gcs-access-id)\n    # echo -e used to make private key multiline (in\
+    \ google json auth key private key is oneline with \\n)\n    export CACHE_GCS_PRIVATE_KEY=$(echo\
+    \ -e $(cat /secrets/gcs-private-key))\n  fi\nfi\n\nif [[ -f /secrets/azure-account-name\
+    \ && -f /secrets/azure-account-key ]]; then\n  export CACHE_AZURE_ACCOUNT_NAME=$(cat\
+    \ /secrets/azure-account-name)\n  export CACHE_AZURE_ACCOUNT_KEY=$(cat /secrets/azure-account-key)\n\
+    fi\n\nif [[ -f /secrets/runner-registration-token ]]; then\n  export REGISTRATION_TOKEN=$(cat\
+    \ /secrets/runner-registration-token)\nfi\n\nif [[ -f /secrets/runner-token ]];\
+    \ then\n  export CI_SERVER_TOKEN=$(cat /secrets/runner-token)\nfi\n\n# Validate\
+    \ this also at runtime in case the user has set a custom secret\nif [[ ! -z \"\
+    $CI_SERVER_TOKEN\" && \"1\" -ne \"1\" ]]; then\n  echo \"Using a runner token\
+    \ with more than 1 replica is not supported.\"\n  exit 1\nfi\n\n# Register the\
+    \ runner\nif ! sh /configmaps/register-the-runner; then\n  exit 1\nfi\n\n# Run\
+    \ pre-entrypoint-script\nif ! bash /configmaps/pre-entrypoint-script; then\n \
+    \ exit 1\nfi\n\n# Start the runner\nexec /entrypoint run --user=gitlab-runner\
+    \ \\\n  --working-directory=/home/gitlab-runner\n"
+  pre-entrypoint-script: ''
+  register-the-runner: "#!/bin/bash\nMAX_REGISTER_ATTEMPTS=30\n\nfor i in $(seq 1\
+    \ \"${MAX_REGISTER_ATTEMPTS}\"); do\n  echo \"Registration attempt ${i} of ${MAX_REGISTER_ATTEMPTS}\"\
+    \n  /entrypoint register \\\n    --template-config /configmaps/config.template.toml\
+    \ \\\n    --non-interactive\n\n  retval=$?\n\n  if [ ${retval} = 0 ]; then\n \
+    \   break\n  elif [ ${i} = ${MAX_REGISTER_ATTEMPTS} ]; then\n    exit 1\n  fi\n\
+    \n  sleep 5\ndone\n\nexit 0\n"
+kind: ConfigMap
+metadata:
+  labels:
+    app: syn-gitlab-runner-gitlab-runner
+    chart: gitlab-runner-0.50.1
+    heritage: Helm
+    release: syn-gitlab-runner
+  name: syn-gitlab-runner-gitlab-runner
+  namespace: syn-gitlab-runner

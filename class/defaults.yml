@@ -2,3 +2,8 @@ parameters:
   gitlab_runner:
     =_metadata: {}
     namespace: syn-gitlab-runner
+    charts:
+      gitlab_runner:
+        source: https://charts.gitlab.io
+        version: v0.50.1
+    helm_values: {}

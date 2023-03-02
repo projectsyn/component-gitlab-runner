@@ -7,4 +7,8 @@ local params = inv.parameters.gitlab_runner;
 
 // Define outputs below
 {
+
+  '00_namespace': kube.Namespace(params.namespace),
+
+
 }

@@ -1,5 +1,5 @@
 = gitlab-runner
 
-gitlab-runner is a Commodore component to manage gitlab-runner.
+gitlab-runner is a Commodore component that wraps GitLab's official gitlab-runner Helm chart.
 
 See the xref:references/parameters.adoc[parameters] reference for further details.

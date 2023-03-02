@@ -1,0 +1,6 @@
+name: gitlab-runner
+title: gitlab-runner
+version: master
+start_page: ROOT:index.adoc
+nav:
+  - modules/ROOT/partials/nav.adoc

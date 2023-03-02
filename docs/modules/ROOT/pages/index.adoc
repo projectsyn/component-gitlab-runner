@@ -1,0 +1,5 @@
+= gitlab-runner
+
+gitlab-runner is a Commodore component to manage gitlab-runner.
+
+See the xref:references/parameters.adoc[parameters] reference for further details.

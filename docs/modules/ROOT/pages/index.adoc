@@ -3,3 +3,21 @@
 gitlab-runner is a Commodore component that wraps GitLab's official gitlab-runner Helm chart.
 
 See the xref:references/parameters.adoc[parameters] reference for further details.
+
+
+== Runner registration
+
+IMPORTANT: You must set a GitLab URL and registration token as described https://docs.gitlab.com/runner/install/kubernetes.html#required-configuration[here].
+
+Runner registration can be done by passing both URL and token via Helm values:
+
+[source]
+----
+parameters:
+  gitlab_runner:
+    helm_values:
+      gitlabUrl: https://gitlab.example.com
+      runnerRegistrationToken: BP1344341K1D3--6d-WxpngN4YayP
+----
+
+Alternatively, you can create a secret for the tokens in the target namespace, with the secret name being e.g. `syn-gitlab-runner-gitlab-runner`. See the https://docs.gitlab.com/runner/install/kubernetes.html#store-registration-tokens-or-runner-tokens-in-secrets[GitLab documentation] for the required keys and values.

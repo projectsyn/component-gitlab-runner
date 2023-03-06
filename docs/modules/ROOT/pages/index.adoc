@@ -20,4 +20,4 @@ parameters:
       runnerRegistrationToken: BP1344341K1D3--6d-WxpngN4YayP
 ----
 
-Alternatively, you can create a secret for the tokens in the target namespace, with the secret name being e.g. `syn-gitlab-runner-gitlab-runner`. See the https://docs.gitlab.com/runner/install/kubernetes.html#store-registration-tokens-or-runner-tokens-in-secrets[GitLab documentation] for the required keys and values.
+Alternatively, you can create a secret for the tokens in the target namespace, with the secret name being for example  `syn-gitlab-runner-gitlab-runner`. See the https://docs.gitlab.com/runner/install/kubernetes.html#store-registration-tokens-or-runner-tokens-in-secrets[GitLab documentation] for the required keys and values.

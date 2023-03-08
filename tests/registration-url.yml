@@ -1,0 +1,6 @@
+parameters:
+  _instance: gitlab-runner-with-registration
+  gitlab_runner:
+    helm_values:
+      gitlabUrl: https://gitlab.example.com
+      runnerRegistrationToken: BP1344341K1D3--6d-WxpngN4YayP

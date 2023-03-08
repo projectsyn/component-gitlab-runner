@@ -2,9 +2,10 @@ local kap = import 'lib/kapitan.libjsonnet';
 local inv = kap.inventory();
 local params = inv.parameters.gitlab_runner;
 local argocd = import 'lib/argocd.libjsonnet';
+local instance = inv.parameters._instance;
 
-local app = argocd.App('gitlab-runner', params.namespace);
+local app = argocd.App(instance, params.namespace);
 
 {
-  'gitlab-runner': app,
+  [instance]: app,
 }

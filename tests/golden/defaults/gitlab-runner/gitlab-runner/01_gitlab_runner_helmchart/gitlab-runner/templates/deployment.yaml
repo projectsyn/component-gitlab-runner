@@ -2,28 +2,28 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: syn-gitlab-runner-gitlab-runner
+    app: gitlab-runner
     chart: gitlab-runner-0.50.1
     heritage: Helm
-    release: syn-gitlab-runner
-  name: syn-gitlab-runner-gitlab-runner
+    release: gitlab-runner
+  name: gitlab-runner
   namespace: syn-gitlab-runner
 spec:
   replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: syn-gitlab-runner-gitlab-runner
+      app: gitlab-runner
   template:
     metadata:
       annotations:
-        checksum/configmap: 60c5696d3c1c31669d02283ea6d7ef482d44e5d081665775d71d624f6aa495d9
+        checksum/configmap: 24bd53325d30f0618bea69bea30a8c155b4c5fe34e1748409da6bb3d5f4edead
         checksum/secrets: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
       labels:
-        app: syn-gitlab-runner-gitlab-runner
+        app: gitlab-runner
         chart: gitlab-runner-0.50.1
         heritage: Helm
-        release: syn-gitlab-runner
+        release: gitlab-runner
     spec:
       containers:
         - command:
@@ -54,7 +54,7 @@ spec:
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 1
-          name: syn-gitlab-runner-gitlab-runner
+          name: gitlab-runner
           ports:
             - containerPort: 9252
               name: metrics
@@ -105,7 +105,7 @@ spec:
                       path: runner-registration-token
                     - key: runner-token
                       path: runner-token
-                  name: syn-gitlab-runner-gitlab-runner
+                  name: gitlab-runner
         - configMap:
-            name: syn-gitlab-runner-gitlab-runner
+            name: gitlab-runner
           name: configmaps

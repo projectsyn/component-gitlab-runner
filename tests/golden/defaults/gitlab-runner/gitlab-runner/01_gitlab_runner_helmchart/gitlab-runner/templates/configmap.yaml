@@ -102,9 +102,9 @@ data:
 kind: ConfigMap
 metadata:
   labels:
-    app: syn-gitlab-runner-gitlab-runner
+    app: gitlab-runner
     chart: gitlab-runner-0.50.1
     heritage: Helm
-    release: syn-gitlab-runner
-  name: syn-gitlab-runner-gitlab-runner
+    release: gitlab-runner
+  name: gitlab-runner
   namespace: syn-gitlab-runner

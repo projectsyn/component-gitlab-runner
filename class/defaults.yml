@@ -1,7 +1,9 @@
 parameters:
   gitlab_runner:
-    =_metadata: {}
-    namespace: syn-gitlab-runner
+    =_metadata:
+      multi_instance: true
+    namespace: syn-${_instance}
+    name: gitlab_runner
     charts:
       gitlab_runner:
         source: https://charts.gitlab.io

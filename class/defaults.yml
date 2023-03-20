@@ -9,4 +9,3 @@ parameters:
         source: https://charts.gitlab.io
         version: v0.50.1
     helm_values: {}
-

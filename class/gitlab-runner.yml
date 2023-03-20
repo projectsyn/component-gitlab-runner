@@ -16,7 +16,7 @@ parameters:
         helm_params:
           name: gitlab-runner
           namespace: ${gitlab_runner:namespace}
-          api_versions: ${gitlab_runner:helm_params:api_versions}
+          api_versions: monitoring.coreos.com/v1
       - input_paths:
           - ${_base_directory}/component/app.jsonnet
         input_type: jsonnet

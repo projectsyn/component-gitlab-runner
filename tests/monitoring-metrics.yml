@@ -1,0 +1,11 @@
+parameters:
+  _instance: gitlab-runner-with-monitoring-and-metrics
+  gitlab_runner:
+    helm_values:
+      metrics:
+        enabled: true
+        serviceMonitor:
+          enabled: true
+      service:
+        enabled: true
+

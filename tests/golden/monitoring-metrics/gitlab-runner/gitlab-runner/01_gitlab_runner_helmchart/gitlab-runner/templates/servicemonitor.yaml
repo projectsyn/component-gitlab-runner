@@ -1,0 +1,22 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app: gitlab-runner
+    chart: gitlab-runner-0.50.1
+    heritage: Helm
+    release: gitlab-runner
+  name: gitlab-runner
+  namespace: syn-gitlab-runner
+spec:
+  endpoints:
+    - port: metrics
+  namespaceSelector:
+    matchNames:
+      - syn-gitlab-runner
+  selector:
+    matchLabels:
+      app: gitlab-runner
+      chart: gitlab-runner-0.50.1
+      heritage: Helm
+      release: gitlab-runner

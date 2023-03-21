@@ -1,4 +1,0 @@
-parameters:
-  gitlab_runner:
-    namespaceLabels:
-      test: label

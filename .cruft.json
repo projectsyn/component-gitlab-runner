@@ -7,7 +7,7 @@
       "name": "gitlab-runner",
       "slug": "gitlab-runner",
       "parameter_key": "gitlab_runner",
-      "test_cases": "defaults registration-url monitoring-metrics namespaceLabels",
+      "test_cases": "defaults registration-url monitoring-metrics",
       "add_lib": "n",
       "add_pp": "n",
       "add_golden": "y",

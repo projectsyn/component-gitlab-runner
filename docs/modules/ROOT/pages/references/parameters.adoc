@@ -28,3 +28,12 @@ default:: `{}`
 All helm_values are passed to the Helm chart.
 
 See https://docs.gitlab.com/runner/install/kubernetes.html#configuring-gitlab-runner-using-the-helm-chart[the official documentation] and the respective https://gitlab.com/gitlab-org/charts/gitlab-runner/blob/main/values.yaml[values.yaml] file for more information.
+
+== `namespaceLabels`
+
+[horizontal]
+type:: dict
+default:: `{}`
+
+Additional labels to add to the component's namespace.
+Key value pairs in the dict are directly added to the generated namespace manifest.

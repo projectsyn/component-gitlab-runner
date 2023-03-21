@@ -29,11 +29,10 @@ All helm_values are passed to the Helm chart.
 
 See https://docs.gitlab.com/runner/install/kubernetes.html#configuring-gitlab-runner-using-the-helm-chart[the official documentation] and the respective https://gitlab.com/gitlab-org/charts/gitlab-runner/blob/main/values.yaml[values.yaml] file for more information.
 
-== `namespaceLabels`
+== `monitoring_enabled`
 
 [horizontal]
-type:: dict
-default:: `{}`
+type:: bool
+default:: `true`
 
-Additional labels to add to the component's namespace.
-Key value pairs in the dict are directly added to the generated namespace manifest.
+For most Kubernetes distributions, the component sets label `monitoring.syn.tools/infra: 'true'` on the namespace in which the Gitlab Runner is deployed.

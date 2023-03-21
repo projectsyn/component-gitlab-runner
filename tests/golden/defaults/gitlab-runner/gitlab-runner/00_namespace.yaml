@@ -3,5 +3,6 @@ kind: Namespace
 metadata:
   annotations: {}
   labels:
+    monitoring.syn.tools/infra: 'true'
     name: syn-gitlab-runner
   name: syn-gitlab-runner

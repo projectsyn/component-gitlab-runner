@@ -1,3 +1,6 @@
+applications:
+  - prometheus
+
 parameters:
   _instance: gitlab-runner-with-monitoring-and-metrics
   gitlab_runner:
@@ -8,3 +11,11 @@ parameters:
           enabled: true
       service:
         enabled: true
+  kapitan:
+    dependencies:
+      - type: https
+        source: https://raw.githubusercontent.com/projectsyn/component-prometheus/master/lib/prometheus.libsonnet
+        output_path: vendor/lib/prometheus.libsonnet
+
+  prometheus:
+    defaultInstance: infra

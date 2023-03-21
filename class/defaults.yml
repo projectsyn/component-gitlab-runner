@@ -3,6 +3,7 @@ parameters:
     =_metadata:
       multi_instance: true
     namespace: syn-${_instance}
+    namespaceLabels: {}
     name: gitlab_runner
     charts:
       gitlab_runner:

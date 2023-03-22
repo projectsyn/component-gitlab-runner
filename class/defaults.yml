@@ -4,6 +4,7 @@ parameters:
       multi_instance: true
     namespace: syn-${_instance}
     name: gitlab_runner
+    monitoring_enabled: true
     charts:
       gitlab_runner:
         source: https://charts.gitlab.io

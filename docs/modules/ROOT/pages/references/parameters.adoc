@@ -28,3 +28,11 @@ default:: `{}`
 All helm_values are passed to the Helm chart.
 
 See https://docs.gitlab.com/runner/install/kubernetes.html#configuring-gitlab-runner-using-the-helm-chart[the official documentation] and the respective https://gitlab.com/gitlab-org/charts/gitlab-runner/blob/main/values.yaml[values.yaml] file for more information.
+
+== `monitoring_enabled`
+
+[horizontal]
+type:: bool
+default:: `true`
+
+For most Kubernetes distributions, the component sets label `monitoring.syn.tools/infra: 'true'` on the namespace in which the Gitlab Runner is deployed.

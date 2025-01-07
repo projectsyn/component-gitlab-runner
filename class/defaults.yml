@@ -2,6 +2,7 @@ parameters:
   gitlab_runner:
     =_metadata:
       multi_instance: true
+      multi_tenant: true
     namespace: syn-${_instance}
     name: gitlab_runner
     monitoring_enabled: true
